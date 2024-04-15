@@ -1,0 +1,76 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SZK.CollectionDetailsPage"
+             xmlns:converters="clr-namespace:SZK"
+             Title="Szczegóły Kolekcji">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SoldItemOpacityConverter x:Key="SoldItemOpacityConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Label x:Name="CollectionNameLabel" FontSize="22"/>
+            <Button x:Name="SummaryButton" Text="Podsumowanie Kolekcji" Clicked="OnSummaryButtonClicked"/>
+            <Button Text="Dodaj Element" Clicked="OnAddItemClicked"/>
+            <CollectionView x:Name="ItemsList" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10" Padding="10" Margin="5" BorderColor="LightGray"
+               Opacity="{Binding IsSold, Converter={StaticResource SoldItemOpacityConverter}}">
+                            <Grid ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Row="0" Grid.RowSpan="4" Grid.Column="0"
+                       Source="{Binding ProfileImagePath}"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100"/>
+
+                                <Label Grid.Row="0" Grid.Column="1"
+                       Text="{Binding Name}"
+                       FontAttributes="Bold"
+                       VerticalOptions="Start"/>
+
+                                <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                    <Label Text="Cena: " FontAttributes="Italic"/>
+                                    <Label Text="{Binding Price, StringFormat=' {0} zł'}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                                    <Label Text="Status: " FontAttributes="Italic"/>
+                                    <Label Text="{Binding Status, StringFormat=' {0}'}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                    <Label Text="Ocena: " FontAttributes="Italic"/>
+                                    <Label Text="{Binding Rating, StringFormat=' {0}/10'}"/>
+                                </StackLayout>
+
+                                <Label Grid.Row="0" Grid.RowSpan="5" Grid.Column="2"
+                       Text="{Binding Comment}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

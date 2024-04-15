@@ -1,0 +1,25 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SZK.AddItemPage"
+             Title="Dodaj Nowy Element">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+            <Entry x:Name="ItemNameEntry" Placeholder="Nazwa elementu"/>
+            <Button x:Name="PickImageButton" Text="Wybierz Zdjecie" Clicked="OnPickImageButtonClicked"/>
+            <Image x:Name="ItemImagePreview" HeightRequest="200"/>
+            <Entry x:Name="PriceEntry" Placeholder="Cena"/>
+            <Picker x:Name="StatusPicker" Title="Status">
+                <Picker.Items>
+                    <x:String>Nowy</x:String>
+                    <x:String>Uzyty</x:String>
+                    <x:String>Na sprzedaz</x:String>
+                    <x:String>Sprzedany</x:String>
+                    <x:String>Chce kupic</x:String>
+                </Picker.Items>
+            </Picker>
+            <Slider x:Name="RatingSlider" Minimum="1" Maximum="10"/>
+            <Entry x:Name="CommentEntry" Placeholder="Komentarz"/>
+            <Button x:Name="SaveButton" Text="Zapisz" Clicked="OnSaveButtonClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

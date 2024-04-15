@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SZK.EditItemPage"
+             Title="Edytuj Element">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+            <Image x:Name="ProfileImage" HeightRequest="100" Aspect="AspectFit"/>
+            <Button x:Name="ChangeImageButton" Text="Zmień Zdjęcie" Clicked="OnChangeImageButtonClicked"/>
+            <Entry x:Name="ItemNameEntry" Placeholder="Nazwa elementu"/>
+            <Entry x:Name="PriceEntry" Placeholder="Cena"/>
+            <Picker x:Name="StatusPicker" Title="Status">
+                <Picker.Items>
+                    <x:String>Nowy</x:String>
+                    <x:String>Użyty</x:String>
+                    <x:String>Na sprzedaż</x:String>
+                    <x:String>Sprzedany</x:String>
+                    <x:String>Chcę kupić</x:String>
+                </Picker.Items>
+            </Picker>
+            <Slider x:Name="RatingSlider" Minimum="1" Maximum="10"/>
+            <Entry x:Name="CommentEntry" Placeholder="Komentarz"/>
+            <Button x:Name="SaveButton" Text="Zapisz" Clicked="OnSaveButtonClicked"/>
+            <Button x:Name="DeleteButton" Text="Usuń" Clicked="OnDeleteButtonClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

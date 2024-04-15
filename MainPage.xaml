@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SZK.MainPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Label Text="Zarządzanie Kolekcjami" HorizontalOptions="Center" FontSize="22"/>
+            <Button x:Name="AddCollectionBtn" Text="Dodaj Kolekcję" Clicked="OnAddCollectionClicked" />
+            <Button x:Name="EditCollectionBtn" Text="Edytuj Kolekcję" Clicked="OnEditCollectionClicked" />
+            <Button x:Name="DeleteCollectionBtn" Text="Usuń Kolekcję" Clicked="OnDeleteCollectionClicked" />
+            <CollectionView x:Name="CollectionsList" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
