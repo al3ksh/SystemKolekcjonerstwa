@@ -1,8 +1,10 @@
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SZK
 {
@@ -52,11 +54,28 @@ namespace SZK
             }
         }
 
+        public static string NormalizeString(string input)
+        {
+            var normalizedString = input.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
         private async void OnSummaryButtonClicked(object sender, EventArgs e)
         {
             int totalCount = items.Count;
-            int soldCount = items.Count(item => item.Status == "Sprzedany");
-            int forSaleCount = items.Count(item => item.Status == "Na sprzeda¿");
+            int soldCount = items.Count(item => NormalizeString(item.Status) == "Sprzedany");
+            int forSaleCount = items.Count(item => NormalizeString(item.Status) == "Na sprzedaz");
 
             await DisplayAlert("Podsumowanie Kolekcji",
                 $"Ca³kowita liczba przedmiotów: {totalCount}\n" +
